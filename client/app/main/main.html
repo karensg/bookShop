@@ -1,0 +1,75 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<header class="hero-unit" id="banner">
+  <div class="container">
+    <h1>Search for books</h1>
+    <div class="col-lg-4">
+    </div>
+    <div class="col-lg-4 search">
+      <form id="search-frm">
+        <div class="input-group">
+          <input type="text" class="form-control" id="keywords">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit" id="search-btn">Search!</button>
+          </span>
+        </div><!-- /input-group -->
+      </form>
+    </div><!-- /.col-lg-6 -->
+  </div>
+</header>
+
+<div class="container" ng-show="books">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Results</h1>
+      <table id="booksTable" class="table table-hover">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author(s)</th>
+            <th>ISBN</th>
+            <th>Price</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="(key, book) in books">
+            <td>{{book.ItemAttributes.Title}}</td>
+            <td>{{book.ItemAttributes.Author.join(", ")}}</td>
+            <td>{{book.ItemAttributes.ISBN}}</td>
+            <td>{{book.ItemAttributes.ListPrice.FormattedPrice || book.ItemAttributes.TradeInValue.FormattedPrice}}</td>
+            <td><a class="pointer" data-toggle="modal" ng-attr-data-target="{{'#modal' + key}}" ng-click="updateGoodReads(key)">Reviews</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Modals -->
+<div class="bookModal" ng-repeat="(key, book) in books">
+  <div class="modal fade" ng-attr-id="{{'modal' + key}}" tabindex="-1" role="dialog" ng-attr-aria-labelledby="{{'modalLabel' + key}}" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" ng-attr-id="{{'modalLabel' + key}}">{{book.ItemAttributes.Title}}</h4>
+        </div>
+        <div class="modal-body" ng-attr-id="{{'modalbody' + key}}">
+          <div><strong>Rating <span ng-attr-id="{{'rating' + key}}"></span></strong></div>
+          <div ng-attr-id="{{'review' + key}}"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<footer class="footer">
+  <div class="container">
+      <p>&copy; Karens Grigorjancs | Web Services BookShop Assignment</p>
+  </div>
+</footer>
