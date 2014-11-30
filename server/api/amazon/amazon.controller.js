@@ -8,7 +8,6 @@ var amazonKey = "AKIAJOC7FJJPG3A45KHQ";
 var amazonSecret = "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";
 var associateTag = "aaltunivwebte-20";
 var url = 'https://webservices.amazon.com/AWSECommerceService/AWSECommerceService.wsdl';
-var options = {};
 
 exports.search = function(req, res) {
 
@@ -32,7 +31,7 @@ exports.search = function(req, res) {
     }
   };
 
-  soap.createClient(url, options, function(err, client) {
+  soap.createClient(url, function(err, client) {
       client.ItemSearch(args, function(err, result) {
           res.json(result.Items.Item);
       });
@@ -57,7 +56,7 @@ exports.book = function(req, res) {
     }
   };
 
-  soap.createClient(url, options, function(err, client) {
+  soap.createClient(url, function(err, client) {
     client.ItemLookup(args, function(err, result) {
       res.json(result);
     });

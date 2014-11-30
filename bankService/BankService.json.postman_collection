@@ -1,0 +1,138 @@
+{
+	"id": "6c2549ee-2355-0ad2-616c-e0f0e6195d30",
+	"name": "BankService",
+	"description": "REST API service requests",
+	"order": [
+		"b49cb642-8f5d-500e-5f47-e1394029ed55",
+		"03669b7c-4eee-1588-f68a-b64adcc70b3a"
+	],
+	"folders": [],
+	"timestamp": 1413828034032,
+	"synced": false,
+	"requests": [
+		{
+			"id": "03669b7c-4eee-1588-f68a-b64adcc70b3a",
+			"headers": "Content-Type: application/json\n",
+			"url": "http://localhost:8000/rest",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "POST",
+			"data": [
+				{
+					"key": "EUR",
+					"value": "100",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "accountNumber",
+					"value": "accountNumber189",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "accountName",
+					"value": "Karens Grigorjancs",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "expirationDate",
+					"value": "11/16",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "securityNumber",
+					"value": "123d",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "resellerName",
+					"value": "Aalto Book Shop",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "resellerAuthCode",
+					"value": "7c5f16dd3e8946290b0eb193cc",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"name": "Unsuccesful request",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1413828161822,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"collectionId": "6c2549ee-2355-0ad2-616c-e0f0e6195d30",
+			"synced": false
+		},
+		{
+			"id": "b49cb642-8f5d-500e-5f47-e1394029ed55",
+			"headers": "Content-Type: application/json\n",
+			"url": "http://localhost:8000/rest",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "POST",
+			"data": [
+				{
+					"key": "EUR",
+					"value": "200",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "accountNumber",
+					"value": "1234567890123456",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "accountName",
+					"value": "Karens Grigorjancs",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "expirationDate",
+					"value": "11/16",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "securityNumber",
+					"value": "123",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "resellerName",
+					"value": "Aalto Book Shop",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "resellerAuthCode",
+					"value": "7c5f16df18e3ad3e8946290b0eb193cc",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"name": "Succesful request",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1413828054659,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"collectionId": "6c2549ee-2355-0ad2-616c-e0f0e6195d30",
+			"synced": false
+		}
+	]
+}

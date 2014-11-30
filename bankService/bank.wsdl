@@ -1,0 +1,49 @@
+<definitions name="BankService"
+   targetNamespace="http://localhost:8000/bank.wsdl"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+   xmlns:tns="http://localhost:8000/bank.wsdl"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+   <message name="MakePaymentRequest">
+      <part name="EUR" type="xsd:integer"/>
+      <part name="accountNumber" type="xsd:integer"/>
+      <part name="accountName" type="xsd:string"/>
+      <part name="expirationDate" type="xsd:string"/>
+      <part name="securityNumber" type="xsd:integer"/>
+      <part name="resellerName" type="xsd:string"/>
+      <part name="resellerAuthCode" type="xsd:string"/>
+   </message>
+   <message name="MakePaymentResponse">
+      <part name="paymentCompleted" type="xsd:boolean"/>
+      <part name="error" type="xsd:string"/>
+   </message>
+
+   <portType name="Bank_PortType">
+      <operation name="makePayment">
+         <input message="tns:MakePaymentRequest"/>
+         <output message="tns:MakePaymentResponse"/>
+      </operation>
+   </portType>
+
+   <binding name="Bank_Binding" type="tns:Bank_PortType">
+     <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+     <operation name="makePayment">
+      <soap:operation soapAction="makePayment"/>
+      <input>
+         <soap:body use="literal" namespace="http://www.w3.org/2001/XMLSchema" />
+      </input>
+      <output>
+         <soap:body use="literal" namespace="http://www.w3.org/2001/XMLSchema" />
+      </output>
+   </operation>
+   </binding>
+
+   <service name="Bank_Service">
+      <documentation>WSDL File for BankService</documentation>
+      <port binding="tns:Bank_Binding" name="Bank_Port">
+         <soap:address
+            location="http://localhost:8000/wsdl" />
+      </port>
+   </service>
+</definitions>

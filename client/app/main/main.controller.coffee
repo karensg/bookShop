@@ -79,7 +79,8 @@ angular.module 'bookShopApp'
         $("#error").hide()
         $("#success").show()
       else
-        $("#errorMessage").html(res.error)
+        $("#errorMessage").html(res.message)
         $("#success").hide()
         $("#error").show()
         $('#orderModal').modal('hide')
+      console.log res.message
