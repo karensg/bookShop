@@ -18,13 +18,28 @@
   </div>
 </header>
 
-<div class="container" ng-show="books">
+<div id="success" class="row">
+  <div class="alert alert-success alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <strong>Congatulations!</strong> Your order was successfully processed.
+  </div>
+</div>
+
+<div id="error" class="row">
+  <div class="alert alert-danger alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <strong>Oops!</strong> Your order is not processed. Please check your bank details and try again.
+  </div>
+</div>
+
+<div class="container" ng-show="books.length != 0">
   <div class="row">
     <div class="col-lg-12">
       <h1 class="page-header">Results</h1>
       <table id="booksTable" class="table table-hover">
         <thead>
           <tr>
+            <th>Amount</th>
             <th>Title</th>
             <th>Author(s)</th>
             <th>ISBN</th>
@@ -34,6 +49,7 @@
         </thead>
         <tbody>
           <tr ng-repeat="(key, book) in books">
+            <td><input type="text" class="amount" ng-attr-id="{{'amount' + key}}" /></td>
             <td>{{book.ItemAttributes.Title}}</td>
             <td>{{book.ItemAttributes.Author.join(", ")}}</td>
             <td>{{book.ItemAttributes.ISBN}}</td>
@@ -42,6 +58,7 @@
           </tr>
         </tbody>
       </table>
+      <button type="button" class="btn btn-primary" id="order" data-toggle="modal" data-target="#orderModal">Order</button>
     </div>
   </div>
 </div>
@@ -59,6 +76,77 @@
           <div ng-attr-id="{{'review' + key}}"></div>
         </div>
         <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="orderModal">
+  <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="orderModalLabel">Finalize order</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <h1>Your order</h1>
+              <table id="booksTable" class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Amount</th>
+                    <th>Title</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="(key, book) in cart">
+                    <td>{{book.amount}}</td>
+                    <td>{{books[key].ItemAttributes.Title}}</td>
+                    <td>{{book.price | currency}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="total"><strong>Total price: {{totalAmount | currency}}</strong></div>
+              <br/>
+
+              <h1>Bank details</h1>
+              <form role="form" name="bankForm">
+                <div class="form-group">
+                  <label>Choose your bank</label>
+                  <label class="radio-inline">
+                    <input type="radio" name="radioType" ng-model="bank.Type" ng-value="0" class="ng-pristine ng-untouched ng-valid"> My Bank
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="radioType" ng-model="bank.Type" ng-value="1" class="ng-pristine ng-untouched ng-valid"> Another Bank
+                  </label>
+                </div>
+                <div class="form-group">
+                  <label for="AccountNumberInput">Account Number</label>
+                  <input type="text" class="form-control ng-pristine ng-valid ng-touched" id="AccountNumberInput" ng-model="bank.AccountNumber">
+                </div>
+                <div class="form-group">
+                  <label for="AccountNameInput">Account Name</label>
+                  <input type="text" class="form-control ng-pristine ng-valid ng-touched" id="AccountNameInput" ng-model="bank.AccountName">
+                </div>
+                <div class="form-group">
+                  <label for="ExpirationDateInput">Expiration Date</label>
+                  <input type="text" class="form-control ng-pristine ng-valid ng-touched" id="ExpirationDateInput" ng-model="bank.ExpirationDate">
+                </div>
+                <div class="form-group">
+                  <label for="SecurityNumberInput">Security Number</label>
+                  <input type="text" class="form-control ng-pristine ng-valid ng-touched" id="SecurityNumberInput" ng-model="bank.SecurityNumber">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" id="emptyCart">Empty cart</button>
+          <button type="button" class="btn btn-primary" id="sendOrder">Send order</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>

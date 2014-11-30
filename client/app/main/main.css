@@ -30,9 +30,27 @@
 }
 
 .search {
-  margin: 50px 0;
+  margin: 50px 0
 }
 
 .pointer {
   cursor:pointer
+}
+
+.amount {
+  width:25px
+}
+
+#order {
+  float:right
+}
+
+.total {
+  float:right;
+  margin-right:8px
+}
+
+#success, #error {
+  margin: 10px 100px;
+  display:none
 }
