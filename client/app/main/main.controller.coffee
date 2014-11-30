@@ -30,6 +30,8 @@ angular.module 'bookShopApp'
   $scope.totalAmount = 0
   $("#order").click () ->
     $scope.$apply () ->
+      $scope.cart = []
+      $scope.totalAmount = 0
       for i in [0...10]
         amount =  parseInt($("#amount"+i).val())
         if amount > 0
@@ -66,7 +68,7 @@ angular.module 'bookShopApp'
       total: $scope.totalAmount
     }
     $http.post('/api/order/', data).success (res) ->
-      if res.success
+      if $.parseJSON(res.paymentCompleted)
         $timeout ->
           $scope.$apply () ->
             $scope.books = []
@@ -74,7 +76,10 @@ angular.module 'bookShopApp'
             $scope.totalAmount = 0
         $('#orderModal').modal('hide')
         $(".amount").val("")
+        $("#error").hide()
         $("#success").show()
       else
+        $("#errorMessage").html(res.error)
+        $("#success").hide()
         $("#error").show()
         $('#orderModal').modal('hide')
