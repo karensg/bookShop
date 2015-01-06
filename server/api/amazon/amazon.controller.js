@@ -58,7 +58,7 @@ exports.book = function(req, res) {
 
   soap.createClient(url, function(err, client) {
     client.ItemLookup(args, function(err, result) {
-      res.json(result);
+      res.json(result.Items.Item);
     });
   });
 
